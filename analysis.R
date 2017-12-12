@@ -116,7 +116,8 @@ events %>%
   dplyr::group_by(date, search) %>%
   dplyr::summarize(prop = 100 * mean(uses)) %>%
   tidyr::spread(search, prop) %>%
-  summary
+  dplyr::ungroup() %>%
+  dplyr::summarize_all(median)
 events %>%
   dplyr::group_by(session_id) %>%
   dplyr::summarize(
@@ -134,7 +135,7 @@ events %>%
   dplyr::select(-sessions) %>%
   dplyr::ungroup() %>%
   tidyr::spread(uses, prop) %>%
-  summary
+  dplyr::summarize_all(median)
 
 # Clickthrough Rate -- need to exclude clicks from auto to full-text SRP
 events %>%
@@ -160,7 +161,8 @@ events %>%
   ) %>%
   dplyr::ungroup() %>%
   dplyr::mutate(uses = factor(uses)) %>%
-  View
+  dplyr::group_by(uses) %>%
+  dplyr::summarize_all(median)
 
 auto2full <- events %>%
   dplyr::group_by(date, session_id) %>%
@@ -180,7 +182,7 @@ auto2full %>%
     `went to full-text SRP from autocomplete (v2)` = 100 * mean(switchedV2),
     `used full-text but separate from autocomplete` = 100 * mean(`full-text but not switched`),
   ) %>%
-  View
+  dplyr::summarize_all(median)
 
 events %>%
   dplyr::group_by(date, session_id) %>%
@@ -197,4 +199,5 @@ events %>%
   dplyr::tally() %>%
   dplyr::mutate(n = 100 * n / sum(n)) %>%
   tidyr::spread(source, n) %>%
-  View
+  dplyr::ungroup() %>%
+  dplyr::summarize_all(median)
