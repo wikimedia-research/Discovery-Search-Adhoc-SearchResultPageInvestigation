@@ -96,13 +96,13 @@ condensed <- events %>%
   dplyr::do(condense(.)) %>%
   dplyr::ungroup()
 
-condensed %>%
-  dplyr::group_by(session_id) %>%
-  dplyr::summarize(both = all(c("autocomplete", "fulltext") %in% source)) %>%
-  dplyr::ungroup() %>%
-  dplyr::filter(both) %>%
-  dplyr::inner_join(condensed) %>%
-  View
+# condensed %>%
+#   dplyr::group_by(session_id) %>%
+#   dplyr::summarize(both = all(c("autocomplete", "fulltext") %in% source)) %>%
+#   dplyr::ungroup() %>%
+#   dplyr::filter(both) %>%
+#   dplyr::inner_join(condensed) %>%
+#   View
 
 # % of Searches
 events %>%
