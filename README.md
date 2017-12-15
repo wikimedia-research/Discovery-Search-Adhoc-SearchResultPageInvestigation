@@ -4,6 +4,8 @@ We're [previously identified](https://commons.wikimedia.org/w/index.php?title=Fi
 
 ## Findings
 
+![Sankey diagram showing search session event flow.](plot.png)
+
 Updated numbers from my pull of 2 weeks of data from 11/20-12/04. On a daily basis on English Wikipedia:
 
 - 92-95% of sessions performed an autocomplete search
